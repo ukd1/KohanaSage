@@ -1,0 +1,8 @@
+SAGEPAY payment gateway integration for CodeIgniter
+
+VERSION 0.4 (only tested using Simulator account for now)
+
+HOW TO INSTALL
+1) Copy the structure into your CI system/application folder
+2) Edit the config file (notes inside)
+3) Load the library and start using it
