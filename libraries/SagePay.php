@@ -273,7 +273,8 @@ class SagePay {
 	 * 					VPSTxId, TxAuthNo, SecurityKey, AVSCV2, AddressResult,
 	 * 					PostcodeResult, CV2Result)
 	 */
-	function txRepeat(array $order) {
+	function txRepeat ( $order )
+	{
 		$this->last_tx_code = $this->_clean_input($this->sage_vnd.'_'.gmdate("Ymd_His").'_repeat', FALSE, TRUE);
 		
 		$post = array();
@@ -305,7 +306,7 @@ class SagePay {
 	 * @return	array	$result (Success, VPSProtocol, Status, StatusDetail,
 	 * 					VPSTxId, TxAuthNo)
 	 */
-	public function txRefund( $order )
+	public function txRefund ( $order )
 	{
 		$this->last_tx_code = $this->_clean_input($this->sage_vnd.'_'.gmdate("Ymd_His").'_refund', FALSE, TRUE);
 		
@@ -375,7 +376,7 @@ class SagePay {
 	 * @return	array	$result (Success, VPSProtocol, Status, StatusDetail,
 	 * 					VPSTxId, TxAuthNo, SecurityKey)
 	 */
-	public function txManual( $customer, $card, $order)
+	public function txManual ( $customer, $card, $order )
 	{
 		$this->last_tx_code = $this->_clean_input($this->sage_vnd.'_'.gmdate("Ymd_His").'_manual', FALSE, TRUE);
 		
@@ -497,7 +498,8 @@ class SagePay {
 	 * @param	array	$order (vps_tx_id, security_key, tx_auth_no)
 	 * @return	array	$result (Success, VPSProtocol, Status, StatusDetail)
 	 */
-	function txVoid(array $order) {
+	function txVoid ( $order)
+	{
 		$this->last_tx_code = $this->_clean_input($this->sage_vnd.'_'.gmdate("Ymd_His").'_void',FALSE,TRUE);
 		$post = array();
 		$post['TxType'] = 'VOID';
