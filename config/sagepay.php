@@ -12,7 +12,7 @@ $config['vendor_name'] = '';
 $config['vendor_enc_pass'] = '';
 
 //	The currency you will be using for your transactions
-$config['currency'] = '';
+$config['currency'] = 'GBP';
 
 //	Your notification URL
 $config['notify'] = '';
