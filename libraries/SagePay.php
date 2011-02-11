@@ -137,21 +137,6 @@ class SagePay {
 			return $this->notify;
 		}
 	}
-
-	private function _parse_response ($response)
-	{
-		$lines = explode("\r\n",$response);
-		$result = array();
-		foreach($lines as $line)
-		{
-			if ( trim($line)!='' )
-			{
-				list($f,$v) = explode('=',$line,2);
-				$result[$f] = trim($v);
-			}
-		}
-		return $result;
-	}
 	
 //	SERVICE-SPECIFIC FUNCTIONS (the ones you actually call)
 
@@ -672,5 +657,26 @@ class SagePay {
 		
 		// timeout
 		$this->timeout = (int)$this->kget($config, 'timeout', self::DEFAULT_TIMEOUT);
+	}
+
+	/**
+	 * Parse the response from SagePay
+	 *
+	 * @param string $response
+	 * @return array
+	 */
+	private function _parse_response ( $response )
+	{
+		$lines = explode("\r\n",$response);
+		$result = array();
+		foreach($lines as $line)
+		{
+			if ( trim($line)!='' )
+			{
+				list($f,$v) = explode('=',$line,2);
+				$result[$f] = trim($v);
+			}
+		}
+		return $result;
 	}
 }
