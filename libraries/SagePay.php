@@ -103,6 +103,13 @@ class SagePay {
 	public	$last_tx_code = '';
 
 	/**
+	 * Timeout
+	 *
+	 * @var null
+	 */
+	private $timeout = null;
+
+	/**
 	 * Setup!
 	 *
 	 * @param array $config
@@ -167,7 +174,7 @@ class SagePay {
 		$this->last_tx_code	= $this->_clean_input($this->sage_vnd.'_'.gmdate("Ymd_His").'_payment', FALSE, TRUE);
 
 		$post	= array();
-		$post['TxType']					= 'PAYMENT';
+		$post['TxType'] = 'PAYMENT';
 		$post['Vendor'] = $this->sage_vnd;
 		$post['VendorTxCode'] = $this->last_tx_code;
 		$post['Amount'] = $order['amount'];
@@ -589,7 +596,7 @@ class SagePay {
 			return array(
 				'Success'		=> FALSE,
 				'Status'		=> 'OPERATION',
-				'StatusDetail'	=> 'Operation "'.$operation.'" does not exist or is not supported in the current mode'
+				'StatusDetail'	=> 'Operation "'.$operation.'" does not exist or is not supported in the current mode (' . $this->sage_svc . ')'
 			);
 		}
 		
@@ -606,7 +613,7 @@ class SagePay {
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $url);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-		curl_setopt($ch, CURLOPT_TIMEOUT, self::TIMEOUT);
+		curl_setopt($ch, CURLOPT_TIMEOUT, $this->timeout);
 		curl_setopt($ch, CURLOPT_HEADER, FALSE);
 		curl_setopt($ch, CURLOPT_POST, TRUE);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $postdata);
@@ -647,7 +654,7 @@ class SagePay {
 		$mode = $this->kget($config, 'mode', 'sim');
 
 		// know which mode we are using
-		$this->sage_svc	= $mode != 'test' AND $mode != 'live' ? 'sim' : 'sys';
+		$this->sage_svc	= $mode;
 		$this->sage_url	= $this->list_url[$mode];
 
 		// keep the VendorTxCode
