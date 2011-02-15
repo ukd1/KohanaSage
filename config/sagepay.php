@@ -15,7 +15,8 @@ $config['vendor_enc_pass'] = '';
 $config['currency'] = 'GBP';
 
 //	Your notification URL
-$config['notify'] = '';
+//$config['notify'] = uri::site('/sagepay/callback', 'http');
+$config['notify'] = 'http://www.example.com/';
 
 // Timeout for curl
 $config['timeout'] = 3;
